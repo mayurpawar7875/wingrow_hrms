@@ -1,0 +1,38 @@
+name: frontend
+description: "A new Flutter project for Wingrow Market HRMS."
+publish_to: 'none' # Private project, not published to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2 # For iOS-style icons
+  http: ^1.2.0 # Add if you plan to make API calls
+  provider: ^6.0.3 # For state management (optional)
+  shared_preferences: ^2.0.13 # For storing login state locally
+  image_picker: ^1.1.2
+  permission_handler: ^11.4.0
+  geolocator: ^13.0.2
+  intl: ^0.20.2
+  camera: ^0.10.5+5
+  google_mlkit_face_detection: ^0.8.0
+  path_provider: ^2.1.1
+  path: ^1.8.3
+ 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0 # Recommended linting rules for better coding practices
+
+flutter:
+  uses-material-design: true
+
+  # Adding assets for the project
+  assets:
+    - assets/images/Wingrow Market Final Logo.png
+
