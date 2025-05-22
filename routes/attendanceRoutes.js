@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const { markAttendance } = require('../controllers/attendanceController');
 const { validateGPS } = require('../controllers/attendanceController');
 const { uploadGPSLocation } = require('../controllers/attendanceController');
-// const { saveStallConfirmation } = require('../controllers/attendanceController');
 const { getAttendanceHistory } = require('../controllers/attendanceController');
 
 
@@ -20,12 +18,6 @@ router.post('/gps/upload', uploadGPSLocation);
 
 // Route for fetching attendance history
 router.get('/history', getAttendanceHistory);
-
-
-
-
-
-
 
 module.exports = router;
 

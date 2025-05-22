@@ -1,23 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const gpsLocationController = require('../controllers/gpsLocationController');
-const protect = require('../middleware/authMiddleware');  // Check if this is correct
+const protect = require('../middleware/authMiddleware'); // ✅ Make sure this is correct
 const upload = require('../middleware/upload');
 
-console.log("🔍 Checking protect middleware:", typeof protect);  // Debug log
-
+// ✅ Final working route
 router.post(
   '/upload-gps-selfie',
-  (req, res, next) => { 
-    console.log("🛡️ Protect middleware triggered"); 
-    next();
-  }, 
-  upload.single('selfie'),
-  (req, res, next) => {
-    console.log("📸 File upload middleware triggered"); 
-    next();
-  },
-  gpsLocationController.uploadGPSWithSelfie
+  protect,                          // ✅ This applies the token verification middleware
+  upload.single('selfie'),          // ✅ This handles the selfie file
+  gpsLocationController.uploadGPSWithSelfie // ✅ This saves the data to DB
 );
 
 module.exports = router;
