@@ -5,35 +5,68 @@ const bcrypt = require('bcryptjs');
 
 // const jwt = require('jsonwebtoken');
 
+// exports.login = async (req, res) => {
+//     try {
+//         const { username, password } = req.body;
+
+//         // Find the user in the database
+//         const user = await User.findOne({ username });
+//         if (!user) {
+//             return res.status(401).json({ message: "User not found" });
+//         }
+
+//         // Verify password
+//         const isMatch = await bcrypt.compare(password, user.password);
+//         if (!isMatch) {
+//             return res.status(401).json({ message: "Invalid credentials" });
+//         }
+
+//         // Generate JWT token
+//         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+//         // ✅ **Ensure userId is included in the response**
+//         res.status(200).json({
+//             success: true,
+//             token: token,  
+//             userId: user._id.toString() // Convert ObjectId to String
+//         });
+//     } catch (error) {
+//         console.error("Login error:", error);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// };
+
 exports.login = async (req, res) => {
-    try {
-        const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
 
-        // Find the user in the database
-        const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(401).json({ message: "User not found" });
-        }
+    console.log("Login Request Body:", req.body);
 
-        // Verify password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: "Invalid credentials" });
-        }
-
-        // Generate JWT token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-
-        // ✅ **Ensure userId is included in the response**
-        res.status(200).json({
-            success: true,
-            token: token,  
-            userId: user._id.toString() // Convert ObjectId to String
-        });
-    } catch (error) {
-        console.error("Login error:", error);
-        res.status(500).json({ message: "Server error" });
+    const user = await User.findOne({ username });
+    if (!user) {
+      console.log("User not found");
+      return res.status(401).json({ message: "User not found" });
     }
+
+    console.log("User found:", user.username);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      console.log("Invalid password");
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.status(200).json({
+      success: true,
+      token: token,
+      userId: user._id.toString()
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 
