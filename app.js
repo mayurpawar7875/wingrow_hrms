@@ -5,17 +5,12 @@ const cors = require('cors');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
-// const marketRoutes = require('./routes/marketRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
-// const notificationRoutes = require('./routes/notificationRoutes');
-// const reportRoutes = require('./routes/reportRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
 const stallsRoutes = require('./routes/stallsRoutes');
 const gpsRoutes = require('./routes/gpsRoutes');
 const marketRoutes = require("./routes/marketRoutes");
 const marketFileRoutes = require('./routes/marketFileRoutes');
-
-
 
 // Middleware to parse JSON
 app.use(express.json());
